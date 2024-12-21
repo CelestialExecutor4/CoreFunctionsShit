@@ -1,0 +1,58 @@
+getgenv().getmetatable = function(target)
+    if type(target) == "table" then
+        return rawget(target, "__metatable")
+    else
+        error("Target must be a table!")
+    end
+end
+
+getgenv().setmetatable = function(target, metatable)
+    if type(target) == "table" then
+        local currentMetatable = getmetatable(target)
+        -- Set the new metatable only if it's different
+        if currentMetatable ~= metatable then
+            return rawset(target, "__metatable", metatable)
+        else
+            error("Metatable is already set to the target table.")
+        end
+    else
+        error("Target must be a table!")
+    end
+end
+
+-- Hookfunction: A function that allows you to hook into other functions
+getgenv().hookfunction = function(originalFunc, hook)
+    -- The hook function wraps the original function
+    return function(...)
+        -- Call the hook before or after the original function
+        hook(...)  -- Call the hook with arguments
+        return originalFunc(...)  -- Call the original function with arguments
+    end
+end
+
+-- Setreadonly: Makes a table or variable readonly
+getgenv().setreadonly = function(target, readonly)
+    if type(target) == "table" then
+        local metatable = getmetatable(target)
+        if readonly then
+            metatable.__newindex = function()
+                error("Attempt to modify a readonly table")
+            end
+        else
+            metatable.__newindex = nil
+        end
+        setmetatable(target, metatable)
+    else
+        error("Target must be a table!")
+    end
+end
+
+-- Getreadonly: Checks if a table is readonly
+getgenv().getreadonly = function(target)
+    if type(target) == "table" then
+        local metatable = getmetatable(target)
+        return metatable.__newindex == nil
+    else
+        error("Target must be a table!")
+    end
+end
