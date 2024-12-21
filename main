@@ -174,7 +174,7 @@ local blockedurls = {
 	"http://ip-api.com/",
 	"https://ipinfo.io",
 	"http://checkip.amazonaws.com"
-	"https://ipapi.co/"
+	"https://ipapi.co/",
 }
 
 function urlblockcheck(url)
