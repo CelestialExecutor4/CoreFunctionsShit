@@ -1,0 +1,75 @@
+--[[ 
+   ______     __          __  _       __
+  / ____/__  / /__  _____/ /_(_)___ _/ /
+ / /   / _ \/ / _ \/ ___/ __/ / __ `/ / 
+/ /___/  __/ /  __(__  ) /_/ / /_/ / /  
+\____/\___/_/\___/____/\__/_/\__,_/_/   
+          [ Custom Functions ]                     
+]]
+
+-- is loaded
+if getgenv().Is_Executor_Loaded == "true" then
+    warn("Executor is already loaded!")
+    return
+else
+    warn("Loading InitFunctions..")
+end
+
+-- Set flag
+getgenv().Is_Executor_Loaded = "false"
+
+-- metadata
+local CelestialVersion = "1.1.4"
+local Celestial = {
+    about = {
+        _name = 'Celestial',
+        _version = CelestialVersion,
+        _publisher = "Elemental Softworks"
+    }
+}
+table.freeze(Celestial.about)  -- freeze
+
+-- load core funcs
+local function loadCoreFunctions()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/celestial/refs/heads/main/NotificationService", true))()  -- Notification service
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/BlockedUrlService", true))()  -- Blocked URLs service
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/VulnerableFuncs", true))()  -- Vulnerable functions
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/hooks/Metatables", true))()
+end
+
+-- init
+loadCoreFunctions()
+
+-- ConnectionTest
+local function ConnectionTest()
+    local lastReceived = tick()
+    while true do
+        local code = math.random(1000, 9999)
+        lastReceived = tick()
+        wait(5)
+        
+        if tick() - lastReceived > 5 then
+            warn("[Celestial] Connection between executor and external has been lost. Did you close the executor?")
+        end
+    end
+end
+
+-- Notify the user once everything is loaded (only if executor is loaded)
+if getgenv().Is_Executor_Loaded == "true" then
+    getgenv().Notify("[Celestial]", "Executor Loaded, thanks for supporting us :D", 5, {
+        backgroundColor = Color3.fromRGB(40, 40, 40),
+        titleColor = Color3.fromRGB(0, 170, 255),
+        messageColor = Color3.fromRGB(200, 200, 200),
+        borderRadius = 15,
+        backgroundDecal = 5430597512 
+    })
+end
+
+-- update status n shi
+getgenv().Is_Executor_Loaded = "true"
+
+if getgenv().Is_Executor_Loaded == "true" then
+    print("Custom Functions Loaded")
+else
+    print("Something went wrong with loading the InitScript, please contact the developers about this.") 
+end
