@@ -7,6 +7,21 @@
           [ Custom Functions ]                     
 ]]
 
+local function checkExecutor()
+    local executor = identifyexecutor()
+
+    if not string.find(tostring(executor), "Celestial X") then
+        warn("Suspicious activity detected, this has been reported to the Discord server.")
+        local player = game.Players.LocalPlayer
+        player:Kick("\n[Celestial Anti Tamper]\nThis action has been logged")
+    else
+        print("[Celestial Anti Tamper] Your client has been verified.")
+    end
+end
+
+checkExecutor()
+
+
 -- is loaded
 if getgenv().Is_Executor_Loaded == "true" then
     warn("Executor is already loaded!")
