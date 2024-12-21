@@ -1,4 +1,4 @@
--- List of blocked URLs (example)
+-- List of blocked URLs
 local blockedurls = {
 	"https://v4.ident.me",
 	"http://ip-api.com/",
