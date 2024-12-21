@@ -3,7 +3,7 @@ local blockedurls = {
 	"https://v4.ident.me",
 	"http://ip-api.com/",
 	"https://ipinfo.io",
-	"http://checkip.amazonaws.com"
+	"http://checkip.amazonaws.com",
 	"https://ipapi.co/"
 }
 
