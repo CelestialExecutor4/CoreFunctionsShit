@@ -1,0 +1,30 @@
+-- List of blocked URLs (example)
+local blockedurls = {
+	"https://v4.ident.me",
+	"http://ip-api.com/",
+	"https://ipinfo.io",
+	"http://checkip.amazonaws.com"
+	"https://ipapi.co/"
+}
+
+function urlblockcheck(url)
+    for _, blocked in ipairs(blockedurls) do
+        local normal = url:lower():gsub("www.", "")
+        local normalb = blocked:lower():gsub("www.", "")
+        if normal:find(normalb, 1, true) then
+            -- If blocked URL is found, send the notification
+            Notify("Malicious script ran", 
+                "A script you just ran attempted to contact a dangerous server", 
+                5, 
+                {
+                    backgroundColor = Color3.fromRGB(0, 0, 0),  -- Black background
+                    borderRadius = 20,  -- Rounded corners
+                    titleColor = Color3.fromRGB(255, 0, 0),  -- Red title color
+                    messageColor = Color3.fromRGB(255, 0, 0)  -- Red message color
+                }
+            )
+            return true
+        end
+    end
+    return false
+end
