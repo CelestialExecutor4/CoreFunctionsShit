@@ -7,7 +7,7 @@ local function checkForNewVersion()
 
     -- Step 1: Contact the server to get the latest version
     local response = request({
-        Url = "https://example.com/get-version",  -- This URL returns just the latest version as plain text
+        Url = "https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/UpdateTxt",  -- This URL returns just the latest version as plain text
         Method = "GET",
         Headers = {["Content-Type"] = "text/plain"}  -- Server returns plain text (version number)
     })
