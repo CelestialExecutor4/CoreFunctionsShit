@@ -56,3 +56,39 @@ getgenv().getreadonly = function(target)
         error("Target must be a table!")
     end
 end
+
+
+
+-- add certain stuff under here for quick updates i hate updating obfuscated code
+local originalRequire = require
+
+-- Overwrite the require function
+getgenv().require = function(id)
+    -- Check if the argument is a string representing an Asset ID (number)
+    if type(id) == "string" and id:match("^%d+$") then
+        local assetId = tonumber(id)
+        
+        -- Load the module using InsertService
+        local insertService = game:GetService("InsertService")
+        
+        -- Try to load the module from the asset ID
+        local success, module = pcall(function()
+            return insertService:LoadAsset(assetId)
+        end)
+        
+        if success then
+            -- If successful, require the module from the loaded asset
+            local moduleScript = module:FindFirstChildOfClass("ModuleScript")
+            if moduleScript then
+                return originalRequire(moduleScript)
+            else
+                error("ModuleScript not found in the asset")
+            end
+        else
+            error("Failed to load asset with ID: " .. id)
+        end
+    else
+        -- Fallback: use the original require if it's not an Asset ID
+        return originalRequire(id)
+    end
+end
