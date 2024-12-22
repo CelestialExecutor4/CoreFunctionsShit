@@ -54,6 +54,7 @@ local function runScript()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/hooks/Metatables", true))()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/gethiddenproperty.lua", true))() -- hidden property
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/getconnections.lua", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/otherfuncs.lua", true))()
     end
 
     -- Initialize the core functions
