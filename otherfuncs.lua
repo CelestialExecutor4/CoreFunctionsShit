@@ -1,6 +1,3 @@
-getgenv().hookfunc = hookfunction
-getgenv().replaceclosure = hookfunction
-
 -- Implementation of Prototypes, Closures, and Upvalues in Roblox Lua
 -- shit implementation
 
