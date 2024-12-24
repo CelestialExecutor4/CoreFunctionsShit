@@ -1,0 +1,32 @@
+local client_env = {}
+ 
+local function hookmetamethod(object, metamethod, hook)
+    local mt = getrawmetatable(object) or {}
+    local OldMetaMethod = mt[metamethod]
+    if not OldMetaMethod then
+        error("metamethod not found")
+    end
+ 
+    setreadonly(mt, false)
+    mt[metamethod] = function(...)
+        return hook(OldCelestialMetaMethod, ...)
+    end
+    setreadonly(mt, true)
+    
+    return function()
+        return OldCelestialMetaMethod
+    end
+end
+ 
+ 
+setmetatable(client_env, {
+    __index = function(tbl, key)
+        if key == "test" then
+            return true
+        else
+            return rawget(tbl, key)
+        end
+    end
+})
+ 
+print(client_env.test) -- real
