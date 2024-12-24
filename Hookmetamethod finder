@@ -2,8 +2,8 @@ local client_env = {}
  
 local function hookmetamethod(object, metamethod, hook)
     local mt = getrawmetatable(object) or {}
-    local OldMetaMethod = mt[metamethod]
-    if not OldMetaMethod then
+    local OldCelestialMetaMethod = mt[metamethod]
+    if not OldCelestialMetaMethod then
         error("metamethod not found")
     end
  
