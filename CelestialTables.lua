@@ -1,4 +1,4 @@
-getgenv().Salad = {}
+getgenv().Celestial = {}
 
 getgenv().Celestial.remote_spy = function()
     local suc, rec = pcall(function()
