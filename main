@@ -6,6 +6,9 @@
 \____/\___/_/\___/____/\__/_/\__,_/_/   
           [ Custom Functions ]                     
 ]]
+local VirtualInputManager = Instance.New("VirtualInputManager")
+
+
 
 local function runScript()
     -- Check Executor
