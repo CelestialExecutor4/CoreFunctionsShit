@@ -51,13 +51,12 @@ local function runScript()
 
     -- Function to load core functions
     local function loadCoreFunctions()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/celestial/refs/heads/main/NotificationService", true))()  -- Notification service
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/BlockedUrlService", true))()  -- Blocked URLs service
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/VulnerableFuncs", true))()  -- Vulnerable functions
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/hooks/Metatables", true))()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/otherfuncs.lua", true))()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/gethiddenproperty.lua", true))() -- hidden property
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/getconnections.lua", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CelestialExecutor4/CoreFunctionsShit/refs/heads/main/Hookfunctions.lua", true))()
     end
 
     -- Initialize the core functions
