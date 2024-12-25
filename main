@@ -7,8 +7,17 @@
           [ Custom Functions ]                     
 ]]
 local VirtualInputManager = Instance.New("VirtualInputManager")
+local oldniggarequest = request
 
-
+getgenv().request = function(options)
+	if options.Headers then
+		options.Headers["User-Agent"] = "Celestial/RobloxApp/2.1"
+	else
+		options.Headers = {["User-Agent"] = "Celestial/RobloxApp/2.1"}
+	end
+	local response = oldniggarequest(options)
+	return response
+end
 
 local function runScript()
     -- Check Executor
