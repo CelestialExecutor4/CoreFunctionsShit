@@ -7,4 +7,4 @@ getgenv().Celestial.remote_spy = function()
     if not suc then 
         error("[ Celestial ]: Failed to load the remote spy: "..tostring(rec))
     end 
-end 
+end
