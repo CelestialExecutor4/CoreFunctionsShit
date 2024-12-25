@@ -1,69 +1,44 @@
-getgenv().cclosure = function(nelems, env)
-    local closure = {
-        isC = true,
-        env = env,
-        nupvalues = nelems,
-        upvalues = {},
+-- important stuff goes here
+
+local HttpService = game:GetService("HttpService")
+
+-- Assuming Bridge:InternalRequest is already defined and works as is.
+
+-- Hook Function: Sends a request to hook the given function with custom logic.
+function hookfunction(name, hook)
+    -- Prepare the request body
+    local body = {
+        Url = '/hook',  -- Endpoint for hooking
+        functionName = name,  -- The name of the function to hook
+        hookFunction = HttpService:JSONEncode(hook)  -- Serialize the hook function
     }
-    for i = 1, nelems do
-        closure.upvalues[i] = nil
+    
+    -- Send the request using InternalRequest
+    local response = Bridge:InternalRequest(body)
+
+    -- Handle response (optional, depending on server behavior)
+    if response then
+        print("Successfully hooked function: " .. name)
+    else
+        error("Failed to hook function: " .. name)
     end
-    return closure
 end
 
-getgenv().lclosure = function(nelems, env)
-    local closure = {
-        isC = false,
-        env = env,
-        nupvalues = nelems,
-        upvalues = {},
+-- Return Function: Sends a request to return the function to its original state.
+function returnfunction(name)
+    -- Prepare the request body
+    local body = {
+        Url = '/return',  -- Endpoint for unhooking or restoring
+        functionName = name  -- The name of the function to restore
     }
-    for i = 1, nelems do
-        closure.upvalues[i] = nil
+
+    -- Send the request using InternalRequest
+    local response = Bridge:InternalRequest(body)
+
+    -- Handle response (optional, depending on server behavior)
+    if response then
+        print("Successfully returned function: " .. name)
+    else
+        error("Failed to return function: " .. name)
     end
-    return closure
-end
-
-getgenv().upvalue = function()
-    local upval = {
-        value = nil,
-    }
-    return upval
-end
-
-getgenv().findUpvalue = function(openUpvals, level)
-    for _, upval in ipairs(openUpvals) do
-        if upval.level == level then
-            return upval
-        end
-    end
-
-    local new_upval = getgenv().upvalue()
-    new_upval.level = level
-    table.insert(openUpvals, new_upval)
-    return new_upval
-end
-
-getgenv().closeUpvalues = function(openUpvals, level)
-    for i = #openUpvals, 1, -1 do
-        local upval = openUpvals[i]
-        if upval.level >= level then
-            upval.closed = true
-            upval.value = upval.value or nil
-            table.remove(openUpvals, i)
-        end
-    end
-end
-
-getgenv().getLocalName = function(proto, localNumber, pc)
-    local count = 0
-    for _, locvar in ipairs(proto.locvars) do
-        if locvar.startpc <= pc and pc < locvar.endpc then
-            count = count + 1
-            if count == localNumber then
-                return locvar.varname
-            end
-        end
-    end
-    return nil
 end
