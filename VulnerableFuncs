@@ -96,8 +96,8 @@ function checkVulnerableFunction(funcName)
         if funcName == vulnFunc then
             -- If a vulnerable function is called, trigger the notification
             game:GetService("StarterGui"):SetCore("SendNotification", {
-                Title = "Malicious script ran", 
-                Text = "A script you just ran attempted to execute a dangerous function: " .. funcName,
+                Title = "Celestial Security", 
+                Text = "⚠ A script you just ran attempted to execute a dangerous function: " .. funcName,
                 Duration = 5
             })
             return true
